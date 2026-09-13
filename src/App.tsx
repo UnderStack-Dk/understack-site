@@ -277,12 +277,12 @@ function Footer({ lang }: { lang: Language }) {
               : "Independent software studio run by Diego Posleman. Aarhus, Denmark."}
           </p>
           <a
-            href="https://github.com/Dposleman"
+            href="https://github.com/UnderStack-Dk"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-block text-sm text-cyan-100 hover:text-white"
           >
-            github.com/Dposleman
+            github.com/UnderStack-Dk
           </a>
           <p className="mt-4 text-sm text-white/48">CVR: {COMPANY_CVR}</p>
         </div>

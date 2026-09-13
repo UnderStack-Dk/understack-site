@@ -121,7 +121,7 @@ export const pages: SeoPage[] = [
       {
         title: "Bygget i Aarhus. Lille med vilje.",
         body:
-          "UnderStack er Diego Posleman — et uafhængigt softwarestudio i Aarhus. Du arbejder direkte med den person, der designer og bygger dit produkt: ingen account managers, unødige led eller lange kommunikationskæder. Se koden på GitHub (github.com/Dposleman) eller skriv direkte, hvis du vil tale om et projekt.",
+          "UnderStack er Diego Posleman — et uafhængigt softwarestudio i Aarhus. Du arbejder direkte med den person, der designer og bygger dit produkt: ingen account managers, unødige led eller lange kommunikationskæder. Se udvalgt kode på GitHub (github.com/UnderStack-Dk) eller skriv direkte, hvis du vil tale om et projekt.",
       },
     ],
     related: [
@@ -153,7 +153,7 @@ export const pages: SeoPage[] = [
       {
         title: "Built in Aarhus. Small by design.",
         body:
-          "UnderStack is Diego Posleman — an independent software studio based in Aarhus. You work directly with the person designing and building your product: no account managers, unnecessary layers or long communication chains. See the code on GitHub (github.com/Dposleman) or reach out directly to talk about a project.",
+          "UnderStack is Diego Posleman — an independent software studio based in Aarhus. You work directly with the person designing and building your product: no account managers, unnecessary layers or long communication chains. See selected code on GitHub (github.com/UnderStack-Dk) or reach out directly to talk about a project.",
       },
     ],
     related: [
