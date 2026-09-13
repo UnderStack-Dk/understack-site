@@ -12,6 +12,8 @@ export type PageKind = "home" | "service" | "case" | "caseIndex" | "portfolio" |
 export type SeoPage = {
   lang: Language;
   slug: string;
+  /** Shared identifier for translated pages whose URLs use different slugs. */
+  translationKey?: string;
   kind: PageKind;
   title: string;
   description: string;
@@ -55,8 +57,9 @@ export function pagePath(page: SeoPage) {
 }
 
 export function pageAlternates(page: SeoPage) {
+  const pageKey = page.translationKey ?? page.slug;
   const localizedPages = (["dk", "en"] as Language[])
-    .map((lang) => allPages.find((item) => item.lang === lang && item.kind === page.kind && item.slug === page.slug))
+    .map((lang) => allPages.find((item) => item.lang === lang && item.kind === page.kind && (item.translationKey ?? item.slug) === pageKey))
     .filter((item): item is SeoPage => Boolean(item));
 
   const alternates = localizedPages.map((item) => ({
@@ -229,6 +232,7 @@ const dkServices: Omit<SeoPage, "lang" | "kind">[] = [
   },
   {
     slug: "webudvikling",
+    translationKey: "web-development",
     title: "Webudvikling Danmark | Websites og webplatforme",
     description: "Webudvikling i Danmark med fokus på performance, SEO, UX og konvertering for virksomheder.",
     h1: "Webudvikling i Danmark med teknisk kvalitet og kommerciel retning.",
@@ -309,23 +313,29 @@ const dkServices: Omit<SeoPage, "lang" | "kind">[] = [
   },
   {
     slug: "ai-loesninger",
-    title: "AI løsninger til virksomheder | UnderStack Danmark",
-    description: "AI-løsninger til virksomheder: automatisering, interne assistenter, workflows og software med praktisk forretningsværdi.",
-    h1: "AI-løsninger til danske virksomheder, der skal bruges i praksis.",
-    eyebrow: "AI løsninger virksomheder",
-    intro: "UnderStack bygger AI-assisterede workflows, interne værktøjer og produktfunktioner, hvor AI løser konkrete opgaver i stedet for at være pynt.",
+    translationKey: "ai-solutions",
+    title: "AI-løsninger til virksomheder | AI leverandør i Danmark",
+    description: "AI-løsninger til danske virksomheder fra en praktisk AI leverandør: automatisering, interne assistenter og software, der løser konkrete opgaver.",
+    h1: "AI-løsninger til danske virksomheder med konkrete arbejdsgange.",
+    eyebrow: "AI leverandør i Danmark",
+    intro: "UnderStack er en dansk AI leverandør, der bygger AI-assisterede workflows, interne værktøjer og produktfunktioner, hvor teknologien løser en konkret opgave.",
     sections: [
-      { title: "AI med driftsværdi", body: "Vi fokuserer på opgaver som automatisering, beslutningsstøtte, strukturering af data, intern assistance, restaurantdrift og kundevendte flows, hvor AI kan reducere friktion." },
+      { title: "AI-løsninger med driftsværdi", body: "De bedste AI-løsninger tager udgangspunkt i en arbejdsproces, ikke i et værktøj. Vi arbejder med automatisering, beslutningsstøtte, strukturering af data, intern assistance, restaurantdrift og kundevendte flows, hvor AI kan reducere friktion." },
+      { title: "Fra AI-idé til løsning, der kan bruges", body: "Som AI leverandør hjælper vi med at afgrænse opgaven, forbinde relevante data og systemer og bygge en løsning, som teamet kan bruge og vedligeholde. Det kan være en intern assistent, et automatiseret workflow eller AI som en del af et eksisterende softwareprodukt." },
       dkServiceSections.process,
       dkServiceSections.stack,
     ],
+    faqs: [
+      { question: "Hvad kan en AI-løsning bruges til i en virksomhed?", answer: "En AI-løsning kan blandt andet understøtte dokumentarbejde, interne søgninger, klassificering, kundevendte flows og gentagne arbejdsopgaver. Værdien afhænger af, at opgaven, dataene og den menneskelige kontrol er tydeligt defineret." },
+      { question: "Hvordan vælger man en AI leverandør?", answer: "Se efter en partner, der først forstår arbejdsgangen og kan tage ansvar for integration, sikkerhed, brugeroplevelse og drift. En god løsning behøver ikke starte stort; den skal kunne måles og bruges i hverdagen." },
+    ],
     related: [
       { label: "AI til danske virksomheder", href: "/dk/insights/ai-loesninger-til-danske-virksomheder" },
+      { label: "Custom webudvikling", href: "/dk/custom-software" },
       { label: "Cases", href: "/dk/cases/" },
-      { label: "Restaurant software", href: "/dk/restaurant-software" },
     ],
     cta: "Book en AI-samtale",
-    keywords: ["AI løsninger virksomheder", "AI software Danmark", "AI restaurant software"],
+    keywords: ["AI løsninger", "AI løsning", "AI leverandør", "AI software Danmark", "AI restaurant software"],
   },
   {
     slug: "restaurant-software",
@@ -353,23 +363,24 @@ const dkServices: Omit<SeoPage, "lang" | "kind">[] = [
   },
   {
     slug: "custom-software",
-    title: "Custom software Danmark | Specialudviklede business systems",
-    description: "Custom software til virksomheder i Danmark og Europa: interne systemer, dashboards, integrationer og digitale produkter.",
-    h1: "Custom software, når virksomheden har brug for mere end standardværktøjer.",
-    eyebrow: "Custom software Denmark",
-    intro: "UnderStack designer og udvikler custom business software til arbejdsgange, data, integrationer og digitale produkter.",
+    title: "Custom webudvikling og software | UnderStack Danmark",
+    description: "Custom webudvikling og specialudviklet software til virksomheder i Danmark: webplatforme, interne systemer, integrationer og digitale produkter.",
+    h1: "Custom webudvikling og software til virksomheder med særlige behov.",
+    eyebrow: "Custom webudvikling Danmark",
+    intro: "UnderStack designer og udvikler custom webplatforme og business software til arbejdsgange, data, integrationer og digitale produkter.",
     sections: [
-      { title: "For virksomheder med særlige processer", body: "Custom software giver mening, når man bruger for mange manuelle processer, spreadsheets eller standardværktøjer, der ikke passer til driften." },
+      { title: "Når standardværktøjer og standardwebsites ikke passer", body: "Custom webudvikling giver mening, når virksomheden bruger for mange manuelle processer, spreadsheets eller standardværktøjer, der ikke passer til driften. Vi bygger løsningen omkring den måde, teamet faktisk arbejder på." },
+      { title: "Fra webplatform til internt system", body: "Nogle opgaver kræver et klart virksomhedswebsite. Andre kræver login, roller, data, dashboards eller integrationer. Vi kan bygge begge dele som én sammenhængende løsning, uden at gøre projektet mere komplekst end nødvendigt." },
       dkServiceSections.process,
       dkServiceSections.stack,
     ],
     related: [
+      { label: "Webudvikling Danmark", href: "/dk/webudvikling" },
       { label: "Softwareudvikling", href: "/dk/softwareudvikling" },
-      { label: "Custom software vs SaaS", href: "/en/insights/custom-software-vs-saas" },
       { label: "Peritar - ASEPCO case", href: "/dk/cases/peritar-asepco" },
     ],
     cta: "Diskuter custom software",
-    keywords: ["custom software Denmark", "custom business software Europe", "specialudviklet software"],
+    keywords: ["custom webudvikling", "specialudviklet software", "webplatform udvikling", "custom software Denmark"],
   },
   {
     slug: "webshop-udvikling",
@@ -396,13 +407,15 @@ const dkServices: Omit<SeoPage, "lang" | "kind">[] = [
 const enServices: Omit<SeoPage, "lang" | "kind">[] = [
   {
     slug: "web-development",
-    title: "Web development Denmark | Websites and web platforms",
-    description: "Web development in Denmark for companies that need clear, responsive websites and practical web platforms.",
-    h1: "Websites that explain what you do and make it easy to contact you.",
+    translationKey: "web-development",
+    title: "Web development in Denmark | Websites and web platforms",
+    description: "Web development in Denmark for companies that need a clear, responsive business website or a practical web platform built to perform.",
+    h1: "Web development in Denmark for websites that make your offer clear.",
     eyebrow: "Web development Denmark",
-    intro: "UnderStack builds company websites and web platforms with responsive design, technical SEO, analytics and the integrations your business actually needs.",
+    intro: "UnderStack provides web development in Denmark for company websites and web platforms, with responsive design, technical SEO, analytics and the integrations your business actually needs.",
     sections: [
-      { title: "What we solve", body: "Many business websites look acceptable but fail to explain the offer, build trust or convert qualified visitors. We build clear structure, performance, SEO foundations and conversion paths into the platform." },
+      { title: "Web development that supports the business", body: "Many business websites look acceptable but fail to explain the offer, build trust or convert qualified visitors. We build clear structure, performance, SEO foundations and conversion paths into every website or web platform." },
+      { title: "A website when you need one, a platform when you need more", body: "A focused business website can be the right place to start. When the work needs user accounts, data, workflows or recurring integrations, we can extend the same foundation into a web platform without losing clarity or speed." },
       enServiceSections.process,
       enServiceSections.stack,
     ],
@@ -476,6 +489,7 @@ const enServices: Omit<SeoPage, "lang" | "kind">[] = [
   },
   {
     slug: "ai-development",
+    translationKey: "ai-solutions",
     title: "AI development for companies | Denmark and Europe",
     description: "AI development for companies: automation, internal assistants, workflows and AI-enabled software systems.",
     h1: "AI development for companies that need practical automation, not hype.",

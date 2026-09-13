@@ -91,6 +91,7 @@ export function schemaFor(page: SeoPage) {
       name: page.h1,
       description: page.description,
       provider: { "@type": "Organization", name: "UnderStack", url: SITE_URL },
+      serviceType: page.keywords,
       areaServed: page.lang === "dk" ? ["Aarhus", "Danmark"] : ["Aarhus", "Denmark", "Europe"],
       url: localUrl(path),
     });
