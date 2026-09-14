@@ -6,6 +6,7 @@ export const COMPANY_PHONE_INTERNATIONAL = "+4591406722";
 const smsMessages: Record<Language, string> = {
   dk: "Hej UnderStack,\n\nJeg er interesseret i at høre mere om et projekt.",
   en: "Hi UnderStack,\n\nI'm interested in discussing a project.",
+  se: "Hej UnderStack,\n\nJag är intresserad av att prata om ett projekt.",
 };
 
 export function smsHref(language: Language) {

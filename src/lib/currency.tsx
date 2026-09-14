@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
+import type { Language } from "../seoContent";
 
 export type CurrencyCode = "DKK" | "SEK" | "NOK" | "EUR" | "GBP" | "USD";
 
@@ -7,7 +8,7 @@ type CurrencyContextValue = {
   currency: CurrencyCode;
   currencyOptions: { value: CurrencyCode; label: string }[];
   setCurrency: (currency: CurrencyCode) => void;
-  formatPrice: (dkkAmount: number, language: "dk" | "en") => string;
+  formatPrice: (dkkAmount: number, language: Language) => string;
 };
 
 const STORAGE_KEY = "understack-currency";
@@ -35,8 +36,12 @@ function isCurrencyCode(value: string | null): value is CurrencyCode {
   return value === "DKK" || value === "SEK" || value === "NOK" || value === "EUR" || value === "GBP" || value === "USD";
 }
 
-function formatAmount(value: number, currency: CurrencyCode, language: "dk" | "en") {
-  const locale = language === "dk" ? "da-DK" : "en-DK";
+function localeFor(language: Language) {
+  return language === "dk" ? "da-DK" : language === "se" ? "sv-SE" : "en-DK";
+}
+
+function formatAmount(value: number, currency: CurrencyCode, language: Language) {
+  const locale = localeFor(language);
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
@@ -86,11 +91,11 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       window.localStorage.setItem(STORAGE_KEY, nextCurrency);
     },
     formatPrice(dkkAmount, language) {
-      const base = `DKK ${new Intl.NumberFormat(language === "dk" ? "da-DK" : "en-DK").format(dkkAmount)}`;
+      const base = `DKK ${new Intl.NumberFormat(localeFor(language)).format(dkkAmount)}`;
       if (currency === "DKK") return base;
 
       const converted = formatAmount(dkkAmount * rates[currency], currency, language);
-      return `${base} (${language === "dk" ? "ca." : "approx."} ${converted})`;
+      return `${base} (${language === "dk" || language === "se" ? "ca." : "approx."} ${converted})`;
     },
   }), [currency, rates]);
 

@@ -1,7 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { MemoryRouter } from "react-router-dom";
 import App, { schemaFor } from "./App";
-import { allPages, findPage, pageAlternates, pagePath, SITE_URL, SOCIAL_IMAGE_URL, type Language } from "./seoContent";
+import { allPages, findPage, languageTags, pageAlternates, pagePath, SITE_URL, SOCIAL_IMAGE_URL, type Language } from "./seoContent";
 
 const IMAGE_URL = SOCIAL_IMAGE_URL;
 
@@ -43,7 +43,7 @@ function headFor(pathname: string) {
     };
   }
   const parts = pathname.replace(/^\//, "").split("/");
-  const lang: Language = parts[0] === "en" ? "en" : "dk";
+  const lang: Language = parts[0] === "en" ? "en" : parts[0] === "se" ? "se" : "dk";
   const slug = parts.slice(1).join("/").replace(/\/$/, "");
   const page = findPage(lang, slug) ?? findPage(lang, "")!;
   const canonical = absolute(pagePath(page));
@@ -52,7 +52,7 @@ function headFor(pathname: string) {
   const alternates = pageAlternates(page).map((alternate) => [alternate.hrefLang, absolute(alternate.href)]);
 
   return {
-    lang: lang === "dk" ? "da-DK" : "en",
+    lang: languageTags[lang],
     head: [
       `<title>${title}</title>`,
       `<meta name="description" content="${description}" />`,

@@ -18,6 +18,7 @@ import {
   CONTACT_EMAIL,
   findPage,
   GENERAL_EMAIL,
+  languageTags,
   languageNames,
   pageAlternates,
   pagePath,
@@ -29,7 +30,7 @@ import {
 } from "./seoContent";
 
 function isLanguage(value: string | undefined): value is Language {
-  return value === "dk" || value === "en";
+  return value === "dk" || value === "en" || value === "se";
 }
 
 function localUrl(path: string) {
@@ -66,7 +67,7 @@ export function schemaFor(page: SeoPage) {
       "@type": "WebSite",
       name: "UnderStack",
       url: SITE_URL,
-      inLanguage: page.lang === "dk" ? "da-DK" : "en",
+      inLanguage: languageTags[page.lang],
     },
     {
       "@context": "https://schema.org",
@@ -74,7 +75,7 @@ export function schemaFor(page: SeoPage) {
       name: page.h1,
       description: page.description,
       url: localUrl(path),
-      inLanguage: page.lang === "dk" ? "da-DK" : "en",
+      inLanguage: languageTags[page.lang],
       isPartOf: { "@type": "WebSite", name: "UnderStack", url: SITE_URL },
     },
     {
@@ -92,7 +93,7 @@ export function schemaFor(page: SeoPage) {
       description: page.description,
       provider: { "@type": "Organization", name: "UnderStack", url: SITE_URL },
       serviceType: page.keywords,
-      areaServed: page.lang === "dk" ? ["Aarhus", "Danmark"] : ["Aarhus", "Denmark", "Europe"],
+      areaServed: page.lang === "dk" ? ["Aarhus", "Danmark"] : page.lang === "se" ? ["Sweden", "Nordics", "Europe"] : ["Aarhus", "Denmark", "Europe"],
       url: localUrl(path),
     });
   }
@@ -154,7 +155,7 @@ export function schemaFor(page: SeoPage) {
       author: { "@type": "Organization", name: "UnderStack" },
       publisher: { "@type": "Organization", name: "UnderStack", logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.png` } },
       mainEntityOfPage: localUrl(path),
-      inLanguage: page.lang === "dk" ? "da-DK" : "en",
+      inLanguage: languageTags[page.lang],
     });
   }
 
@@ -175,40 +176,41 @@ export function schemaFor(page: SeoPage) {
 
 function Header({ page }: { page: SeoPage }) {
   const currentPath = pagePath(page);
-  const langLinks: Language[] = ["dk", "en"];
+  const navLanguage = page.lang === "dk" ? "dk" : "en";
+  const langLinks: Language[] = page.lang === "se" ? ["dk", "en", "se"] : ["dk", "en"];
   const { currency, currencyOptions, setCurrency } = useCurrency();
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/8 bg-slate-950/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-4">
-        <a href={`/${page.lang}/`} className="flex items-center gap-3">
+        <a href={`/${navLanguage}/`} className="flex items-center gap-3">
           <img src={logo} alt="UnderStack logo" className="h-8 w-8" loading="eager" />
           <span className="text-sm font-semibold uppercase tracking-[0.28em] text-white/90">UnderStack</span>
         </a>
         <nav className="order-3 flex w-full items-center gap-5 overflow-x-auto pb-1 text-sm text-white/68 lg:order-none lg:w-auto lg:overflow-visible lg:pb-0" aria-label="Primary navigation">
-          <a href={`/${page.lang}/webudvikling-aarhus`} className={page.lang === "dk" ? "hover:text-white" : "hidden"}>
+          <a href={`/${navLanguage}/webudvikling-aarhus`} className={page.lang === "dk" ? "hover:text-white" : "hidden"}>
             Webudvikling
           </a>
-          <a href={`/${page.lang}/web-development`} className={page.lang === "en" ? "hover:text-white" : "hidden"}>
-            Web
+          <a href={`/${navLanguage}/web-development`} className={page.lang !== "dk" ? "hover:text-white" : "hidden"}>
+            {page.lang === "se" ? "Webb" : "Web"}
           </a>
-          <a href={`/${page.lang}/${page.lang === "dk" ? "softwareudvikling" : "software-development"}`} className="hover:text-white">
-            Software
+          <a href={`/${navLanguage}/${page.lang === "dk" ? "softwareudvikling" : "software-development"}`} className="hover:text-white">
+            {page.lang === "se" ? "Mjukvara" : "Software"}
           </a>
-          <a href={`/${page.lang}/restaurant-software`} className="hover:text-white">
-            Restaurant
+          <a href={`/${navLanguage}/restaurant-software`} className="hover:text-white">
+            {page.lang === "se" ? "Restaurang" : "Restaurant"}
           </a>
-          <a href={`/${page.lang}/cases/`} className="hover:text-white">
+          <a href={`/${navLanguage}/cases/`} className="hover:text-white">
             Cases
           </a>
-          <a href={`/${page.lang}/portfolio`} className="hover:text-white">
-            Portfolio
+          <a href={`/${navLanguage}/portfolio`} className="hover:text-white">
+            {page.lang === "se" ? "Portfölj" : "Portfolio"}
           </a>
-          <a href={`/${page.lang}/for-you`} className="hover:text-white">
-            For You
+          <a href={`/${navLanguage}/for-you`} className="hover:text-white">
+            {page.lang === "se" ? "För dig" : "For You"}
           </a>
           <SmsContactLink language={page.lang} location="header" className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-cyan-100 hover:bg-cyan-300/15">
-            {page.lang === "dk" ? "Skriv SMS" : "Send SMS"}
+            {page.lang === "dk" ? "Skriv SMS" : page.lang === "se" ? "Skicka SMS" : "Send SMS"}
           </SmsContactLink>
         </nav>
         <div className="flex items-center gap-2 text-xs text-white/58" aria-label="Language and currency preferences">
@@ -230,9 +232,9 @@ function Header({ page }: { page: SeoPage }) {
             <GlassSelect
               id="site-currency"
               name="currency"
-              label={page.lang === "dk" ? "Valuta" : "Currency"}
+              label={page.lang === "dk" ? "Valuta" : page.lang === "se" ? "Valuta" : "Currency"}
               value={currency}
-              placeholder={page.lang === "dk" ? "Vælg valuta" : "Choose currency"}
+              placeholder={page.lang === "dk" ? "Vælg valuta" : page.lang === "se" ? "Välj valuta" : "Choose currency"}
               options={currencyOptions}
               onChange={(nextCurrency) => {
                 setCurrency(nextCurrency as typeof currency);
@@ -257,7 +259,16 @@ function Footer({ lang }: { lang: Language }) {
           ["Portfolio", "/dk/portfolio"],
           ["For You", "/dk/for-you"],
         ]
-      : [
+      : lang === "se"
+        ? [
+            ["Webbutveckling", "/en/web-development"],
+            ["Mjukvaruutveckling", "/en/software-development"],
+            ["AI utveckling", "/en/ai-development"],
+            ["Restaurangprogramvara", "/en/restaurant-software"],
+            ["Portfölj", "/en/portfolio"],
+            ["För dig", "/en/for-you"],
+          ]
+        : [
           ["Web development", "/en/web-development"],
           ["Software development", "/en/software-development"],
           ["AI development", "/en/ai-development"],
@@ -274,7 +285,9 @@ function Footer({ lang }: { lang: Language }) {
           <p className="mt-4 max-w-md text-sm leading-7 text-white/58">
             {lang === "dk"
               ? "Uafhængigt softwarestudio drevet af Diego Posleman. Aarhus, Danmark."
-              : "Independent software studio run by Diego Posleman. Aarhus, Denmark."}
+              : lang === "se"
+                ? "Oberoende mjukvarustudio drivet av Diego Posleman. Aarhus, Danmark."
+                : "Independent software studio run by Diego Posleman. Aarhus, Denmark."}
           </p>
           <a
             href="https://github.com/UnderStack-Dk"
@@ -287,7 +300,7 @@ function Footer({ lang }: { lang: Language }) {
           <p className="mt-4 text-sm text-white/48">CVR: {COMPANY_CVR}</p>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.24em] text-white/42">Services</div>
+          <div className="text-xs uppercase tracking-[0.24em] text-white/42">{lang === "se" ? "Tjänster" : "Services"}</div>
           <div className="mt-4 grid gap-3 text-sm text-white/62">
             {services.map(([label, href]) => (
               <a key={href} href={href} className="hover:text-white">
@@ -297,20 +310,20 @@ function Footer({ lang }: { lang: Language }) {
           </div>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.24em] text-white/42">Contact</div>
-          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "SMS foretrækkes" : "SMS preferred"}</p>
+          <div className="text-xs uppercase tracking-[0.24em] text-white/42">{lang === "se" ? "Kontakt" : "Contact"}</div>
+          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "SMS foretrækkes" : lang === "se" ? "SMS föredras" : "SMS preferred"}</p>
           <SmsContactLink language={lang} location="footer" className="mt-1 block text-sm text-cyan-100 hover:text-white">
             {COMPANY_PHONE_DISPLAY}
           </SmsContactLink>
           <CopyPhoneButton language={lang} className="mt-2 text-xs text-white/58 transition hover:text-white" />
           <p className="mt-3 text-xs leading-5 text-white/42">
-            {lang === "dk" ? "Hvis du vil tale om flere detaljer, finder vi gerne et tidspunkt, der passer." : "If you would like to talk through more details, we can find a time that works."}
+            {lang === "dk" ? "Hvis du vil tale om flere detaljer, finder vi gerne et tidspunkt, der passer." : lang === "se" ? "Om du vill prata igenom fler detaljer hittar vi gärna en tid som passar." : "If you would like to talk through more details, we can find a time that works."}
           </p>
-          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "Generelle henvendelser" : "General enquiries"}</p>
+          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "Generelle henvendelser" : lang === "se" ? "Allmänna förfrågningar" : "General enquiries"}</p>
           <a href={`mailto:${GENERAL_EMAIL}`} data-event="EMAIL_CLICK" className="mt-1 block text-sm text-cyan-100 hover:text-white">
             {GENERAL_EMAIL}
           </a>
-          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "Produkt og teknik" : "Product and technical"}</p>
+          <p className="mt-4 text-xs text-white/42">{lang === "dk" ? "Produkt og teknik" : lang === "se" ? "Produkt och teknik" : "Product and technical"}</p>
           <a href={`mailto:${CONTACT_EMAIL}`} data-event="EMAIL_CLICK" className="mt-1 block text-sm text-cyan-100 hover:text-white">
             {CONTACT_EMAIL}
           </a>
@@ -491,11 +504,13 @@ function CaseScreenshots({ page }: { page: SeoPage }) {
 function SeoPageView({ page }: { page: SeoPage }) {
   const path = pagePath(page);
   const isDanish = page.lang === "dk";
+  const isSwedish = page.lang === "se";
+  const relatedLanguage = isDanish ? "dk" : "en";
   const alternates = pageAlternates(page).map((alternate) => ({ ...alternate, href: localUrl(alternate.href) }));
 
   return (
     <div className="min-h-screen text-white">
-      <PageMeta title={page.title} description={page.description} path={path} lang={isDanish ? "da-DK" : "en"} alternates={alternates} schema={schemaFor(page)} />
+      <PageMeta title={page.title} description={page.description} path={path} lang={languageTags[page.lang]} alternates={alternates} schema={schemaFor(page)} />
       <div className="noise-overlay" />
       <Header page={page} />
 
@@ -516,12 +531,12 @@ function SeoPageView({ page }: { page: SeoPage }) {
                 >
                   {page.cta}
                 </SmsContactLink>
-                <a href={`/${page.lang}/portfolio`} className="text-sm font-medium text-white/70 underline decoration-white/30 underline-offset-4 transition hover:text-white">
-                  {isDanish ? "Se cases" : "View cases"}
+                <a href={`/${relatedLanguage}/portfolio`} className="text-sm font-medium text-white/70 underline decoration-white/30 underline-offset-4 transition hover:text-white">
+                  {isDanish ? "Se cases" : isSwedish ? "Visa case" : "View cases"}
                 </a>
               </div>
               <p className="mt-4 text-xs text-white/48">
-                {isDanish ? "Hvis du foretrækker at tale om flere detaljer, finder vi gerne et tidspunkt, der passer." : "If you would prefer to talk through more details, we can find a time that works."}
+                {isDanish ? "Hvis du foretrækker at tale om flere detaljer, finder vi gerne et tidspunkt, der passer." : isSwedish ? "Om du vill prata igenom fler detaljer hittar vi gärna en tid som passar." : "If you would prefer to talk through more details, we can find a time that works."}
               </p>
             </div>
           </div>
@@ -557,7 +572,7 @@ function SeoPageView({ page }: { page: SeoPage }) {
 
         {page.faqs ? (
           <section className="mx-auto max-w-7xl px-6 py-10">
-            <h2 className="text-3xl font-semibold tracking-tight">{isDanish ? "Spørgsmål og svar" : "Questions and answers"}</h2>
+            <h2 className="text-3xl font-semibold tracking-tight">{isDanish ? "Spørgsmål og svar" : isSwedish ? "Frågor och svar" : "Questions and answers"}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {page.faqs.map((faq) => (
                 <article key={faq.question} className="rounded-[24px] border border-white/10 bg-white/[0.045] p-6">
@@ -571,7 +586,7 @@ function SeoPageView({ page }: { page: SeoPage }) {
 
         <section className="mx-auto max-w-7xl px-6 py-14">
           <div className="rounded-[30px] border border-cyan-300/14 bg-cyan-300/[0.055] p-7">
-            <h2 className="text-2xl font-semibold tracking-tight">{isDanish ? "Relaterede sider" : "Related pages"}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">{isDanish ? "Relaterede sider" : isSwedish ? "Relaterade sidor" : "Related pages"}</h2>
             <div className="mt-5 flex flex-wrap gap-3">
               {page.related.map((link) => (
                 <a key={`${link.href}-${link.label}`} href={link.href} className="rounded-full border border-white/12 bg-white/6 px-4 py-2 text-sm text-white/78 hover:bg-white/10">

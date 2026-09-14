@@ -6,7 +6,7 @@ export const GASTROAPP_URL = "https://gastroapp.dk";
 export const SOCIAL_IMAGE_PATH = "/og-image.jpg";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}${SOCIAL_IMAGE_PATH}`;
 
-export type Language = "dk" | "en";
+export type Language = "dk" | "en" | "se";
 export type PageKind = "home" | "service" | "case" | "caseIndex" | "portfolio" | "archive" | "insight" | "insightIndex" | "apps" | "marketplace" | "forYou";
 
 export type SeoPage = {
@@ -44,9 +44,16 @@ export type PortfolioProject = {
 export const languageNames: Record<Language, string> = {
   dk: "Dansk",
   en: "English",
+  se: "Svenska",
 };
 
-export const futureLanguages = ["/de/", "/se/", "/no/", "/nl/"];
+export const languageTags: Record<Language, string> = {
+  dk: "da-DK",
+  en: "en",
+  se: "sv-SE",
+};
+
+export const futureLanguages = ["/de/", "/no/", "/nl/"];
 
 export function pagePath(page: SeoPage) {
   if (page.slug === "") {
@@ -58,12 +65,12 @@ export function pagePath(page: SeoPage) {
 
 export function pageAlternates(page: SeoPage) {
   const pageKey = page.translationKey ?? page.slug;
-  const localizedPages = (["dk", "en"] as Language[])
+  const localizedPages = (["dk", "en", "se"] as Language[])
     .map((lang) => allPages.find((item) => item.lang === lang && item.kind === page.kind && (item.translationKey ?? item.slug) === pageKey))
     .filter((item): item is SeoPage => Boolean(item));
 
   const alternates = localizedPages.map((item) => ({
-    hrefLang: item.lang === "dk" ? "da-DK" : "en",
+    hrefLang: languageTags[item.lang],
     href: pagePath(item),
   }));
   const defaultPage = localizedPages.find((item) => item.lang === "dk");
@@ -404,7 +411,7 @@ const dkServices: Omit<SeoPage, "lang" | "kind">[] = [
   },
 ];
 
-const enServices: Omit<SeoPage, "lang" | "kind">[] = [
+const serviceDefinitions: (Omit<SeoPage, "lang" | "kind"> & Partial<Pick<SeoPage, "lang">>)[] = [
   {
     slug: "web-development",
     translationKey: "web-development",
@@ -528,11 +535,96 @@ const enServices: Omit<SeoPage, "lang" | "kind">[] = [
     cta: "Explore restaurant solutions",
     keywords: ["restaurant software Denmark", "restaurant management software Denmark", "kitchen management software", "AI restaurant software"],
   },
+  {
+    lang: "se",
+    slug: "teknisk-seo-sverige",
+    title: "Teknisk SEO Sverige | UnderStack",
+    description:
+      "Teknisk SEO för svenska företag: indexerbar webbplatsstruktur, Core Web Vitals, strukturerad data, flerspråkig SEO och konverteringsmätning.",
+    h1: "Teknisk SEO för svenska företag som vill att sökmotorer ska förstå deras webbplats.",
+    eyebrow: "Teknisk SEO Sverige",
+    intro:
+      "UnderStack hjälper svenska företag att stärka den tekniska grunden för synlighet: crawlbarhet, rendering, prestanda, strukturerad data, flerspråkig struktur och mätbara konverteringsvägar.",
+    sections: [
+      {
+        title: "Teknisk SEO börjar före innehållet",
+        body:
+          "Synlighet i sök beror på om en webbplats kan crawlas, renderas, förstås och bedömas som pålitlig. Vi granskar arkitekturen bakom sidorna: interna länkar, kanoniska URL:er, metadata, sitemap, robots regler, strukturerad data och hur JavaScript når sökmotorer.",
+      },
+      {
+        title: "Byggt för Sverige och tillväxt över gränserna",
+        body:
+          "Ett svenskt företag kan behöva svenskt innehåll, engelska kommersiella sidor eller båda. Vi planerar språk och regionala signaler medvetet, inklusive hreflang där det är relevant, så att tillväxt i Norden och Europa inte skapar duplicerat innehåll eller otydliga URL:er.",
+      },
+      {
+        title: "Vad teknisk SEO kan omfatta",
+        body:
+          "Rätt omfattning följer webbplatsen och det kommersiella målet. Arbetet kan börja med en fokuserad SEO analys och fortsätta med implementation tillsammans med webb och produktutveckling.",
+        items: [
+          "Crawlbarhet, indexering och granskning av kanoniska URL:er",
+          "Core Web Vitals, laddningsbeteende och stabil layout",
+          "Strukturerad data, sitemap och robots konfiguration",
+          "JavaScript rendering och kontroll av serverrenderade sidor",
+          "Flerspråkig och regional SEO arkitektur",
+          "Analys, kontakt händelser och konverteringsmätning",
+        ],
+      },
+      {
+        title: "Tydliga rekommendationer och praktisk leverans",
+        body:
+          "Vi säljer inte placeringar eller publicerar innehåll som bara fyller ut med nyckelord. Resultatet är en prioriterad teknisk plan, tydlig implementation och en webbplatsgrund som stöder användbart innehåll, relevant trafik och framtida tillväxt.",
+      },
+      {
+        title: "Så arbetar vi",
+        body:
+          "Vi definierar affärsmål, målgrupper och arbetsflöden innan implementation. Leveransen sker i fokuserade iterationer med tydlig arkitektur, god användarupplevelse, förvaltningsbar kod och kvalitet inför lansering.",
+        items: ["Strategi och omfattning", "UX och teknisk arkitektur", "Frontend, backend och integrationer", "QA, lansering och förbättring"],
+      },
+    ],
+    faqs: [
+      {
+        question: "Kan UnderStack hjälpa företag i Sverige med teknisk SEO?",
+        answer:
+          "Ja. UnderStack arbetar på distans från Aarhus med företag i Sverige, Danmark och övriga Europa. Arbetet fokuserar på webbplatsens tekniska status och de affärsmål den ska stödja.",
+      },
+      {
+        question: "Garanterar ni placeringar i Google?",
+        answer:
+          "Nej. Placeringar i sök beror på konkurrens, innehåll, auktoritet och sökmotorernas beslut. Teknisk SEO tar bort onödiga hinder och skapar en starkare grund för långsiktig synlighet.",
+      },
+      {
+        question: "Behöver svenska och engelska sidor olika SEO arbete?",
+        answer:
+          "Ofta, ja. Bästa arbetssätt beror på målgrupp, tjänster och marknader. Vi kan bedöma om separata språksidor, hreflang annoteringar och eget innehåll är rätt väg innan de byggs.",
+      },
+      {
+        question: "Kan teknisk SEO kombineras med en ny webbplats eller webbplattform?",
+        answer:
+          "Ja. Det är ofta mer effektivt att etablera teknisk SEO, analys och innehållsstruktur medan en webbplats eller plattform byggs, i stället för att reparera grunden efter lansering.",
+      },
+    ],
+    related: [
+      { label: "Webbutveckling", href: "/en/web-development" },
+      { label: "Anpassad mjukvara", href: "/en/custom-software" },
+      { label: "Mjukvaruutveckling", href: "/en/software-development" },
+      { label: "Insikter", href: "/en/insights/" },
+    ],
+    cta: "Prata om teknisk SEO",
+    keywords: [
+      "teknisk SEO Sverige",
+      "teknisk sökmotoroptimering Sverige",
+      "SEO analys Sverige",
+      "SEO byrå Sverige",
+      "teknisk SEO för företag",
+      "Core Web Vitals Sverige",
+      "flerspråkig SEO Sverige",
+    ],
+  },
 ];
 
 export const servicePages: SeoPage[] = [
   ...dkServices.map((page) => ({ ...page, lang: "dk" as const, kind: "service" as const })),
-  ...enServices.map((page) => ({ ...page, lang: "en" as const, kind: "service" as const })),
+  ...serviceDefinitions.map((page) => ({ ...page, lang: page.lang ?? ("en" as const), kind: "service" as const })),
 ];
 
 export const casePages: SeoPage[] = [

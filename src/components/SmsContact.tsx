@@ -24,7 +24,17 @@ export function SmsContactLink({ language, location, className, children }: SmsC
 
 export function CopyPhoneButton({ language, className }: { language: Language; className?: string }) {
   const [copied, setCopied] = useState(false);
-  const label = copied ? (language === "dk" ? "Kopieret" : "Copied") : language === "dk" ? "Kopiér nummer" : "Copy number";
+  const label = copied
+    ? language === "dk"
+      ? "Kopieret"
+      : language === "se"
+        ? "Kopierat"
+        : "Copied"
+    : language === "dk"
+      ? "Kopiér nummer"
+      : language === "se"
+        ? "Kopiera nummer"
+        : "Copy number";
 
   async function copyPhoneNumber() {
     try {
