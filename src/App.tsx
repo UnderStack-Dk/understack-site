@@ -276,6 +276,7 @@ function Footer({ lang }: { lang: Language }) {
             ["Mjukvaruutveckling", "/se/software-development"],
             ["AI-utveckling", "/se/ai-development"],
             ["Restaurangprogramvara", "/se/restaurant-software"],
+            ["Teknisk SEO", "/se/teknisk-seo-sverige"],
             ["Portfölj", "/se/portfolio"],
             ["För dig", "/se/for-you"],
           ]

@@ -1706,6 +1706,15 @@ const localizedPages = (["se", "de"] as const).flatMap((language) =>
     .map((page) => localizedPage(page, language)),
 );
 
+// Sweden-only SEO page: link it from every other Swedish page so it is
+// reachable through internal navigation, not just the sitemap.
+const tekniskSeoRelatedLink = { label: "Teknisk SEO Sverige", href: "/en/teknisk-seo-sverige" };
+for (const page of localizedPages) {
+  if (page.lang !== "se" || page.slug === "teknisk-seo-sverige") continue;
+  if (page.related.some((link) => link.href.endsWith("/teknisk-seo-sverige"))) continue;
+  page.related = [...page.related, tekniskSeoRelatedLink];
+}
+
 export const allPages = [...sourcePages, ...localizedPages];
 
 export function findPage(lang: Language, slug = "") {

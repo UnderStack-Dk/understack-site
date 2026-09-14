@@ -12,6 +12,15 @@ UnderStack is a software company in Aarhus, Denmark. It builds custom software, 
 - [Restaurant software](https://understack.dk/en/restaurant-software): operations software for restaurants
 - [For You](https://understack.dk/en/for-you): websites and small digital projects
 
+## Sweden
+
+- [Home (Swedish)](https://understack.dk/se/): company overview and services in Swedish
+- [Teknisk SEO Sverige](https://understack.dk/se/teknisk-seo-sverige): technical SEO for Swedish companies (indexability, Core Web Vitals, structured data, multilingual SEO, conversion tracking)
+- [Webbutveckling](https://understack.dk/se/web-development): websites and web platforms in Swedish
+- [Mjukvaruutveckling](https://understack.dk/se/software-development): custom business software in Swedish
+- [AI-utveckling](https://understack.dk/se/ai-development): applied AI solutions and workflows in Swedish
+- [Restaurangprogramvara](https://understack.dk/se/restaurant-software): restaurant operations software in Swedish
+
 ## Products and documented work
 
 - [Portfolio](https://understack.dk/en/portfolio)
