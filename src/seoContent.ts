@@ -22,7 +22,7 @@ export type SeoPage = {
   h1: string;
   eyebrow: string;
   intro: string;
-  sections: { title: string; body: string; items?: string[] }[];
+  sections: { title: string; body: string; items?: string[]; variant?: "process" | "techStack" }[];
   faqs?: { question: string; answer: string }[];
   related: { label: string; href: string }[];
   cta: string;
@@ -92,11 +92,13 @@ const dkServiceSections = {
     body:
       "Vi starter med forretningsmål, brugere og arbejdsgange, før vi designer løsningen. Derefter bygger vi i korte, synlige iterationer med fokus på performance, struktur, sikkerhed og enkel drift.",
     items: ["Strategi og scope", "UX og teknisk arkitektur", "Frontend, backend og integrationer", "QA, launch og løbende forbedring"],
+    variant: "process" as const,
   },
   stack: {
     title: "Teknologi og leverance",
     body:
       "UnderStack bygger webplatforme og softwareprodukter med React, TypeScript, Node.js og API-integrationer. Stacken vælges efter løsningens krav.",
+    variant: "techStack" as const,
   },
 };
 
@@ -106,11 +108,13 @@ const enServiceSections = {
     body:
       "We define business goals, users and operational workflows before implementation. Delivery runs in focused iterations with clear architecture, strong UX, maintainable code and launch-ready quality.",
     items: ["Strategy and scope", "UX and technical architecture", "Frontend, backend and integrations", "QA, launch and improvement"],
+    variant: "process" as const,
   },
   stack: {
     title: "Technology and delivery",
     body:
       "UnderStack builds web platforms and software systems with React, TypeScript, Node.js and API integrations. The stack follows the requirements of the product.",
+    variant: "techStack" as const,
   },
 };
 
@@ -587,6 +591,7 @@ const serviceDefinitions: (Omit<SeoPage, "lang" | "kind"> & Partial<Pick<SeoPage
         body:
           "Vi definierar affärsmål, målgrupper och arbetsflöden innan implementation. Leveransen sker i fokuserade iterationer med tydlig arkitektur, god användarupplevelse, förvaltningsbar kod och kvalitet inför lansering.",
         items: ["Strategi och omfattning", "UX och teknisk arkitektur", "Frontend, backend och integrationer", "QA, lansering och förbättring"],
+        variant: "process",
       },
     ],
     faqs: [
@@ -1689,6 +1694,7 @@ function localizedPage(source: SeoPage, language: "se" | "de"): SeoPage {
       title: localizeText(section.title, language),
       body: localizeText(section.body, language),
       items: section.items?.map((item) => localizeText(item, language)),
+      variant: section.variant,
     })),
     faqs: source.faqs?.map((faq) => ({
       question: localizeText(faq.question, language),

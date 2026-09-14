@@ -1,6 +1,8 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { trackEvent } from "./lib/analytics";
+import { techStackIcons } from "./lib/techStack";
 import { localizeText } from "./localization";
 import { COMPANY_PHONE_DISPLAY, COMPANY_PHONE_INTERNATIONAL } from "./lib/contact";
 import { CurrencyProvider, useCurrency } from "./lib/currency";
@@ -600,7 +602,25 @@ function SeoPageView({ page }: { page: SeoPage }) {
               </div>
               <div>
                 <p className="max-w-3xl text-base leading-8 text-white/66">{section.body}</p>
-              {section.items ? (
+              {section.items && section.variant === "process" ? (
+                <ol className="relative mt-7 space-y-6 border-l border-white/12 pl-7">
+                  {section.items.map((item, itemIndex) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -8 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ duration: 0.4, delay: itemIndex * 0.08 }}
+                      className="relative text-sm leading-6 text-white/72"
+                    >
+                      <span className="absolute -left-[2.35rem] top-0 flex h-6 w-6 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-300/10 text-[11px] font-medium text-cyan-100">
+                        {itemIndex + 1}
+                      </span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ol>
+              ) : section.items ? (
                 <ul className="section-list mt-6 grid gap-x-8 gap-y-3 md:grid-cols-2">
                   {section.items.map((item) => (
                     <li key={item} className="border-t border-white/10 py-3 text-sm text-white/72">
@@ -608,6 +628,16 @@ function SeoPageView({ page }: { page: SeoPage }) {
                     </li>
                   ))}
                 </ul>
+              ) : null}
+              {section.variant === "techStack" ? (
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  {techStackIcons.map(({ Icon, label }) => (
+                    <div key={label} className="flex items-center gap-2 text-white/50">
+                      <Icon className="h-5 w-5" />
+                      <span className="text-xs uppercase tracking-[0.16em]">{label}</span>
+                    </div>
+                  ))}
+                </div>
               ) : null}
               </div>
             </div>
