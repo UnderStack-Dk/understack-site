@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { trackEvent } from "./lib/analytics";
 import { techStackIcons } from "./lib/techStack";
+import { githubStats } from "./lib/githubStats";
 import { localizeText } from "./localization";
 import { COMPANY_PHONE_DISPLAY, COMPANY_PHONE_INTERNATIONAL } from "./lib/contact";
 import { CurrencyProvider, useCurrency } from "./lib/currency";
@@ -587,6 +588,39 @@ function SeoPageView({ page }: { page: SeoPage }) {
             </div>
           </div>
         </section>
+
+        {page.kind === "home" ? (
+          <motion.section
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.4 }}
+            className="border-t border-white/8 px-6 py-8"
+          >
+            <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-12 gap-y-6">
+              <div>
+                <p className="text-3xl font-semibold tracking-tight text-white">{githubStats.publicRepos}</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/45">
+                  {isDanish ? "Offentlige repos" : isSwedish ? "Publika GitHub-repor" : isGerman ? "Öffentliche Repositories" : "Public repositories"}
+                </p>
+              </div>
+              <div>
+                <p className="text-3xl font-semibold tracking-tight text-white">{githubStats.liveInProduction}</p>
+                <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/45">
+                  {isDanish ? "Live i produktion" : isSwedish ? "Live i produktion" : isGerman ? "Live in Produktion" : "Live in production"}
+                </p>
+              </div>
+              <a
+                href="https://github.com/UnderStack-Dk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-white/40 underline decoration-white/20 underline-offset-4 transition hover:text-white/70"
+              >
+                {isDanish ? "Se koden på GitHub" : isSwedish ? "Se koden på GitHub" : isGerman ? "Code auf GitHub ansehen" : "See the code on GitHub"}
+              </a>
+            </div>
+          </motion.section>
+        ) : null}
 
         <CardGrid page={page} />
         <PortfolioGrid page={page} />

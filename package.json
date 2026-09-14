@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && npm run build:client && npm run build:ssr && npm run prerender",
+    "build": "npm run fetch:github-stats && tsc -b && npm run build:client && npm run build:ssr && npm run prerender",
+    "fetch:github-stats": "node scripts/fetch-github-stats.mjs",
     "build:client": "vite build --outDir dist",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
     "prerender": "node scripts/prerender.mjs",
