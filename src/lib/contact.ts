@@ -7,6 +7,7 @@ const smsMessages: Record<Language, string> = {
   dk: "Hej UnderStack,\n\nJeg er interesseret i at høre mere om et projekt.",
   en: "Hi UnderStack,\n\nI'm interested in discussing a project.",
   se: "Hej UnderStack,\n\nJag är intresserad av att prata om ett projekt.",
+  de: "Hallo UnderStack,\n\nich möchte gern über ein Projekt sprechen.",
 };
 
 export function smsHref(language: Language) {

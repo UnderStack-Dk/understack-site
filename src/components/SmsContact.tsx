@@ -29,11 +29,15 @@ export function CopyPhoneButton({ language, className }: { language: Language; c
       ? "Kopieret"
       : language === "se"
         ? "Kopierat"
+        : language === "de"
+          ? "Kopiert"
         : "Copied"
     : language === "dk"
       ? "Kopiér nummer"
       : language === "se"
         ? "Kopiera nummer"
+        : language === "de"
+          ? "Nummer kopieren"
         : "Copy number";
 
   async function copyPhoneNumber() {

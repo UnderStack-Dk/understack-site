@@ -43,7 +43,7 @@ function headFor(pathname: string) {
     };
   }
   const parts = pathname.replace(/^\//, "").split("/");
-  const lang: Language = parts[0] === "en" ? "en" : parts[0] === "se" ? "se" : "dk";
+  const lang: Language = parts[0] === "en" ? "en" : parts[0] === "se" ? "se" : parts[0] === "de" ? "de" : "dk";
   const slug = parts.slice(1).join("/").replace(/\/$/, "");
   const page = findPage(lang, slug) ?? findPage(lang, "")!;
   const canonical = absolute(pagePath(page));

@@ -1,3 +1,5 @@
+import { localizeText } from "./localization";
+
 export const SITE_URL = "https://understack.dk";
 export const CONTACT_EMAIL = "dev.team@understack.dk";
 export const GENERAL_EMAIL = "info@understack.dk";
@@ -6,7 +8,7 @@ export const GASTROAPP_URL = "https://gastroapp.dk";
 export const SOCIAL_IMAGE_PATH = "/og-image.jpg";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}${SOCIAL_IMAGE_PATH}`;
 
-export type Language = "dk" | "en" | "se";
+export type Language = "dk" | "en" | "se" | "de";
 export type PageKind = "home" | "service" | "case" | "caseIndex" | "portfolio" | "archive" | "insight" | "insightIndex" | "apps" | "marketplace" | "forYou";
 
 export type SeoPage = {
@@ -45,15 +47,21 @@ export const languageNames: Record<Language, string> = {
   dk: "Dansk",
   en: "English",
   se: "Svenska",
+  de: "Deutsch",
 };
 
 export const languageTags: Record<Language, string> = {
   dk: "da-DK",
   en: "en",
   se: "sv-SE",
+  de: "de-DE",
 };
 
-export const futureLanguages = ["/de/", "/no/", "/nl/"];
+export const futureLanguages = ["/no/", "/nl/"];
+
+function translationKeyFor(page: SeoPage) {
+  return page.translationKey ?? `${page.kind}:${page.slug}`;
+}
 
 export function pagePath(page: SeoPage) {
   if (page.slug === "") {
@@ -64,9 +72,9 @@ export function pagePath(page: SeoPage) {
 }
 
 export function pageAlternates(page: SeoPage) {
-  const pageKey = page.translationKey ?? page.slug;
-  const localizedPages = (["dk", "en", "se"] as Language[])
-    .map((lang) => allPages.find((item) => item.lang === lang && item.kind === page.kind && (item.translationKey ?? item.slug) === pageKey))
+  const pageKey = translationKeyFor(page);
+  const localizedPages = (["dk", "en", "se", "de"] as Language[])
+    .map((lang) => allPages.find((item) => item.lang === lang && translationKeyFor(item) === pageKey))
     .filter((item): item is SeoPage => Boolean(item));
 
   const alternates = localizedPages.map((item) => ({
@@ -1325,7 +1333,40 @@ export const appsPages: SeoPage[] = [
   },
 ];
 
-export const allPages = [...pages, ...servicePages, ...casePages, ...portfolioPages, ...archivePages, ...insightPages, ...appsPages, ...forYouPages];
+const sourcePages = [...pages, ...servicePages, ...casePages, ...portfolioPages, ...archivePages, ...insightPages, ...appsPages, ...forYouPages];
+
+function localizedPage(source: SeoPage, language: "se" | "de"): SeoPage {
+  return {
+    ...source,
+    lang: language,
+    translationKey: translationKeyFor(source),
+    title: localizeText(source.title, language),
+    description: localizeText(source.description, language),
+    h1: localizeText(source.h1, language),
+    eyebrow: localizeText(source.eyebrow, language),
+    intro: localizeText(source.intro, language),
+    sections: source.sections.map((section) => ({
+      title: localizeText(section.title, language),
+      body: localizeText(section.body, language),
+      items: section.items?.map((item) => localizeText(item, language)),
+    })),
+    faqs: source.faqs?.map((faq) => ({
+      question: localizeText(faq.question, language),
+      answer: localizeText(faq.answer, language),
+    })),
+    related: source.related.map((link) => ({ ...link, label: localizeText(link.label, language) })),
+    cta: localizeText(source.cta, language),
+    keywords: source.keywords.map((keyword) => localizeText(keyword, language)),
+  };
+}
+
+const localizedPages = (["se", "de"] as const).flatMap((language) =>
+  sourcePages
+    .filter((page) => page.lang === "en")
+    .map((page) => localizedPage(page, language)),
+);
+
+export const allPages = [...sourcePages, ...localizedPages];
 
 export function findPage(lang: Language, slug = "") {
   const normalized = slug.replace(/^\/|\/$/g, "");
@@ -1333,7 +1374,7 @@ export function findPage(lang: Language, slug = "") {
 }
 
 export function alternateFor(page: SeoPage, lang: Language) {
-  const candidate = allPages.find((item) => item.lang === lang && item.kind === page.kind && item.slug.split("/").pop() === page.slug.split("/").pop());
+  const candidate = allPages.find((item) => item.lang === lang && translationKeyFor(item) === translationKeyFor(page));
   if (candidate) return pagePath(candidate);
 
   // Insight slugs are translated per-article and do not always have a 1:1

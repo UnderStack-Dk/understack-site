@@ -37,7 +37,7 @@ function isCurrencyCode(value: string | null): value is CurrencyCode {
 }
 
 function localeFor(language: Language) {
-  return language === "dk" ? "da-DK" : language === "se" ? "sv-SE" : "en-DK";
+  return language === "dk" ? "da-DK" : language === "se" ? "sv-SE" : language === "de" ? "de-DE" : "en-DK";
 }
 
 function formatAmount(value: number, currency: CurrencyCode, language: Language) {
@@ -95,7 +95,8 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       if (currency === "DKK") return base;
 
       const converted = formatAmount(dkkAmount * rates[currency], currency, language);
-      return `${base} (${language === "dk" || language === "se" ? "ca." : "approx."} ${converted})`;
+      const approximation = language === "dk" || language === "se" ? "ca." : language === "de" ? "ca." : "approx.";
+      return `${base} (${approximation} ${converted})`;
     },
   }), [currency, rates]);
 
