@@ -689,7 +689,7 @@ export function localizeText(value: string, language: Language) {
     if (!result.includes(source)) continue;
     result = result.replaceAll(source, () => {
       placeholders.push(translation);
-      return ` ${placeholders.length - 1} `;
+      return `${placeholders.length - 1}`;
     });
   }
 
@@ -698,5 +698,5 @@ export function localizeText(value: string, language: Language) {
     return translation ? retainCase(word, translation) : word;
   });
 
-  return result.replace(/ (\d+) /g, (_, index) => placeholders[Number(index)]);
+  return result.replace(/(\d+)/g, (_, index) => placeholders[Number(index)]);
 }
