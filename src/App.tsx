@@ -362,13 +362,19 @@ function CardGrid({ page }: { page: SeoPage }) {
   }
 
   const children = allPages.filter((item) => item.lang === page.lang && item.slug.startsWith(`${page.slug}/`));
+  const kindLabel = languageCopy(page.lang, {
+    dk: { case: "Case", insight: "Insight" },
+    en: { case: "Case", insight: "Insight" },
+    se: { case: "Case", insight: "Insikt" },
+    de: { case: "Projekt", insight: "Einblick" },
+  });
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {children.map((item) => (
           <a key={item.slug} href={pagePath(item)} className="rounded-[28px] border border-white/10 bg-white/[0.045] p-6 transition hover:-translate-y-1 hover:border-cyan-300/24">
-            <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/72">{item.kind === "case" ? "Case" : "Insight"}</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/72">{item.kind === "case" ? kindLabel.case : kindLabel.insight}</p>
             <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">{item.h1}</h2>
             <p className="mt-4 text-sm leading-7 text-white/62">{item.description}</p>
           </a>
@@ -428,7 +434,11 @@ function PortfolioEntry({ project, lang, featured = false }: { project: Portfoli
           ))}
         </ul>
         <div className="mt-6 max-w-xl">
-          <ProductScreenshotGallery screenshots={screenshots} label={`${project.name} screenshots`} />
+          <ProductScreenshotGallery
+            screenshots={screenshots}
+            lang={lang}
+            label={`${project.name} ${languageCopy(lang, { dk: "billeder", en: "screenshots", se: "skärmbilder", de: "Screenshots" })}`}
+          />
         </div>
       </div>
     </article>
@@ -485,12 +495,17 @@ function ArchiveGrid({ page }: { page: SeoPage }) {
     return null;
   }
 
-  const isDanish = page.lang === "dk";
+  const archiveHeading = languageCopy(page.lang, {
+    dk: "Andre projekter under udvikling",
+    en: "Other projects in development",
+    se: "Andra projekt under utveckling",
+    de: "Weitere Projekte in Entwicklung",
+  });
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-12" aria-labelledby="archive-projects">
       <h2 id="archive-projects" className="sr-only">
-        {isDanish ? "Andre projekter under udvikling" : "Other projects in development"}
+        {archiveHeading}
       </h2>
       <div className="border-b border-white/12">
         {archivedProjects.map((project) => (
@@ -508,15 +523,20 @@ function CaseScreenshots({ page }: { page: SeoPage }) {
 
   const caseSlug = page.slug.split("/").pop() ?? "";
   const screenshots = productScreenshots[caseSlug] ?? [];
-  const isDanish = page.lang === "dk";
+  const copy = languageCopy(page.lang, {
+    dk: { label: "Skærmbilleder", soon: "Skærmbilleder tilføjes snart." },
+    en: { label: "Screenshots", soon: "Screenshots coming soon." },
+    se: { label: "Skärmbilder", soon: "Skärmbilder tillkommer snart." },
+    de: { label: "Screenshots", soon: "Screenshots folgen in Kürze." },
+  });
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-6" aria-label={isDanish ? "Skærmbilleder" : "Screenshots"}>
+    <section className="mx-auto max-w-7xl px-6 py-6" aria-label={copy.label}>
       {screenshots.length ? (
-        <ProductScreenshotGallery screenshots={screenshots} />
+        <ProductScreenshotGallery screenshots={screenshots} lang={page.lang} />
       ) : (
         <p className="rounded-[24px] border border-white/10 bg-white/[0.03] px-6 py-5 text-sm text-white/48">
-          {isDanish ? "Skærmbilleder tilføjes snart." : "Screenshots coming soon."}
+          {copy.soon}
         </p>
       )}
     </section>
@@ -939,7 +959,13 @@ function RoutedPage() {
 
   if (!page) {
     const fallback = findPage(lang, "");
-    return fallback ? <SeoPageView page={{ ...fallback, title: "Page not found | UnderStack", h1: "Page not found.", description: "The requested UnderStack page could not be found." }} /> : null;
+    const notFoundCopy = languageCopy(lang, {
+      dk: { title: "Siden blev ikke fundet | UnderStack", h1: "Siden blev ikke fundet.", description: "Den ønskede UnderStack-side kunne ikke findes." },
+      en: { title: "Page not found | UnderStack", h1: "Page not found.", description: "The requested UnderStack page could not be found." },
+      se: { title: "Sidan hittades inte | UnderStack", h1: "Sidan hittades inte.", description: "Den begärda UnderStack-sidan kunde inte hittas." },
+      de: { title: "Seite nicht gefunden | UnderStack", h1: "Seite nicht gefunden.", description: "Die angeforderte UnderStack-Seite konnte nicht gefunden werden." },
+    });
+    return fallback ? <SeoPageView page={{ ...fallback, ...notFoundCopy }} /> : null;
   }
 
   if (location.pathname !== pagePath(page) && !location.pathname.endsWith("/")) {

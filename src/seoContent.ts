@@ -791,6 +791,29 @@ export const portfolioProjects: PortfolioProject[] = [
     capabilities: ["Recipes and food costing", "Inventory, stock and purchasing", "Production, events and closeout", "Reports and operational analytics", "Role-based and multi-restaurant access"],
     status: "Working product",
     cta: { label: "Visit GastroApp", href: GASTROAPP_URL },
+    localized: {
+      dk: {
+        category: "Restaurantdrift-SaaS",
+        description: "Restaurantdriftssoftware, der samler opskrifter, food cost, lager, indkøb, produktion og rapportering i ét system.",
+        capabilities: ["Opskrifter og food cost", "Lager, stock og indkøb", "Produktion, events og closeout", "Rapporter og driftsanalyse", "Rollebaseret adgang til flere restauranter"],
+        status: "Fungerende produkt",
+        cta: { label: "Besøg GastroApp", href: GASTROAPP_URL },
+      },
+      se: {
+        category: "Restaurangdrift-SaaS",
+        description: "Restaurangdriftsmjukvara som samlar recept, food cost, lager, inköp, produktion och rapportering i ett system.",
+        capabilities: ["Recept och food costing", "Lager, stock och inköp", "Produktion, events och avslut", "Rapporter och driftsanalys", "Rollbaserad åtkomst för flera restauranger"],
+        status: "Fungerande produkt",
+        cta: { label: "Besök GastroApp", href: GASTROAPP_URL },
+      },
+      de: {
+        category: "SaaS für Restaurantbetrieb",
+        description: "Restaurantbetriebssoftware, die Rezepte, Food Cost, Lagerbestand, Einkauf, Produktion und Berichte in einem System vereint.",
+        capabilities: ["Rezepte und Food Costing", "Lager, Bestand und Einkauf", "Produktion, Events und Tagesabschluss", "Berichte und Betriebsanalysen", "Rollenbasierter Zugriff für mehrere Restaurants"],
+        status: "Funktionierendes Produkt",
+        cta: { label: "GastroApp besuchen", href: GASTROAPP_URL },
+      },
+    },
   },
   {
     name: "UnderStack Pocket AI",
@@ -823,7 +846,37 @@ export const portfolioProjects: PortfolioProject[] = [
           "Billedgenerering på enheden når en kompatibel lokal model er installeret",
           "Android app launcher og valgfri skærmkontrol hvor distributionen tillader det",
         ],
-        status: "Færdig - Google Play-review",
+        status: "Färdig - Google Play-review",
+      },
+      se: {
+        category: "Local-first mobilassistent",
+        description: "En färdig Android-assistent byggd kring lokal exekvering, godkänt minne, tydliga behörigheter och valfri delegering till en betrodd dator.",
+        capabilities: [
+          "Lokal AI-chatt med nedladdade modeller",
+          "Godkänt lokalt minne lagrat på enheten",
+          "Arbetsflöden för valda filer, PDF-, DOCX- och XLSX-text",
+          "Kamera, bild-OCR och visuell märkning",
+          "Kalender, påminnelser, kontakter, e-postutkast, SMS, telefon, kartor och plats med godkännande",
+          "Offentlig websökning och källäsning när användaren ber om det",
+          "Bildgenerering på enheten när en kompatibel lokal modell är installerad",
+          "Android-apputforskare och valfria skärmkontrollytor där distributionen tillåter det",
+        ],
+        status: "Färdig – granskas i Google Play",
+      },
+      de: {
+        category: "Local-first Mobile-Assistent",
+        description: "Ein fertiggestellter Android-Assistent, aufgebaut auf lokaler Ausführung, freigegebenem Speicher, expliziten Berechtigungen und optionaler Delegation an einen vertrauenswürdigen Rechner.",
+        capabilities: [
+          "Lokaler KI-Chat mit heruntergeladenen Modellen",
+          "Freigegebener lokaler Speicher auf dem Gerät",
+          "Workflows für ausgewählte Dateien, PDF-, DOCX- und XLSX-Text",
+          "Kamera, Bild-OCR und visuelle Kennzeichnung",
+          "Kalender, Erinnerungen, Kontakte, E-Mail-Entwürfe, SMS, Telefon, Karten und Standort mit Freigabe",
+          "Öffentliche Websuche und Quellenlektüre, wenn der Nutzer online gehen möchte",
+          "Bildgenerierung auf dem Gerät bei installiertem kompatiblem lokalem Modell",
+          "Android-App-Launcher und optionale Bildschirmsteuerung, wo die Distribution es erlaubt",
+        ],
+        status: "Fertiggestellt – im Google-Play-Review",
       },
     },
   },
@@ -835,6 +888,29 @@ export const portfolioProjects: PortfolioProject[] = [
     capabilities: ["Legacy PHP -> TypeScript modernization", "Frontend and backend modernization", "UI/UX modernization", "Maintainable code structure", "Scalable architecture preparation"],
     status: "Platform modernization in progress",
     location: "Mendoza, Argentina",
+    localized: {
+      dk: {
+        category: "Modernisering af forretningsplatform",
+        description: "En professionel platform, der bruges til ekspertvurderingsarbejde for ASEPCO i Mendoza, Argentina, som nu gennemgår en stor teknisk modernisering af UnderStack.",
+        capabilities: ["Migrering fra legacy PHP til TypeScript", "Modernisering af frontend og backend", "Modernisering af UI/UX", "Vedligeholdbar kodestruktur", "Forberedelse til skalerbar arkitektur"],
+        status: "Platformmodernisering i gang",
+        location: "Mendoza, Argentina",
+      },
+      se: {
+        category: "Modernisering av affärsplattform",
+        description: "En professionell plattform som används för expertbedömningsarbete åt ASEPCO i Mendoza, Argentina, som nu genomgår en stor teknisk modernisering av UnderStack.",
+        capabilities: ["Modernisering från legacy PHP till TypeScript", "Modernisering av frontend och backend", "Modernisering av UI/UX", "Underhållbar kodstruktur", "Förberedelse för skalbar arkitektur"],
+        status: "Plattformsmodernisering pågår",
+        location: "Mendoza, Argentina",
+      },
+      de: {
+        category: "Modernisierung der Geschäftsplattform",
+        description: "Eine professionelle Plattform für Gutachten-Workflows für ASEPCO in Mendoza, Argentinien, die derzeit von UnderStack umfassend technisch modernisiert wird.",
+        capabilities: ["Modernisierung von Legacy-PHP zu TypeScript", "Modernisierung von Frontend und Backend", "UI/UX-Modernisierung", "Wartbare Codestruktur", "Vorbereitung auf eine skalierbare Architektur"],
+        status: "Plattformmodernisierung läuft",
+        location: "Mendoza, Argentinien",
+      },
+    },
   },
   {
     name: "Life",
@@ -843,6 +919,26 @@ export const portfolioProjects: PortfolioProject[] = [
       "A completed, local personal organization app for tasks, notes, bills, receipts, subscriptions, documents and focused everyday planning.",
     capabilities: ["Tasks and notes", "Bills, receipts and OCR", "Subscriptions and documents", "Shopping and personal planning", "ADHD-friendly organization"],
     status: "Completed - Google Play review",
+    localized: {
+      dk: {
+        category: "Local-first personligt OS",
+        description: "En færdig, lokal personlig organiseringsapp til opgaver, noter, regninger, kvitteringer, abonnementer, dokumenter og fokuseret hverdagsplanlægning.",
+        capabilities: ["Opgaver og noter", "Regninger, kvitteringer og OCR", "Abonnementer og dokumenter", "Indkøb og personlig planlægning", "ADHD-venlig organisering"],
+        status: "Færdig - anmeldelse i Google Play",
+      },
+      se: {
+        category: "Local-first personligt OS",
+        description: "En färdig, lokal app för personlig organisation för uppgifter, anteckningar, räkningar, kvitton, abonnemang, dokument och fokuserad vardagsplanering.",
+        capabilities: ["Uppgifter och anteckningar", "Räkningar, kvitton och OCR", "Abonnemang och dokument", "Inköp och personlig planering", "ADHD-vänlig organisation"],
+        status: "Färdig – granskas i Google Play",
+      },
+      de: {
+        category: "Local-first persönliches Betriebssystem",
+        description: "Eine fertiggestellte, lokale App zur persönlichen Organisation für Aufgaben, Notizen, Rechnungen, Quittungen, Abonnements, Dokumente und fokussierte Alltagsplanung.",
+        capabilities: ["Aufgaben und Notizen", "Rechnungen, Quittungen und OCR", "Abonnements und Dokumente", "Einkäufe und persönliche Planung", "ADHS-freundliche Organisation"],
+        status: "Fertiggestellt – im Google-Play-Review",
+      },
+    },
   },
 ];
 
@@ -858,6 +954,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A scheduling product concept for multi-location businesses with availability, leave, contractual limits and practical attendance controls.",
     capabilities: ["Employee scheduling", "Availability and vacation management", "Contractual hour limits", "Replacement workflows and notifications", "Geofenced attendance"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "Vagtplanlægning",
+        description: "Et koncept til vagtplanlægning for virksomheder med flere lokationer, med tilgængelighed, orlov, kontraktlige grænser og praktisk fremmødekontrol.",
+        capabilities: ["Medarbejderplanlægning", "Tilgængeligheds- og feriestyring", "Kontraktlige timegrænser", "Erstatnings-workflows og notifikationer", "Geofence-baseret fremmøde"],
+        status: "Koncept",
+      },
+      se: {
+        category: "Personalschemaläggning",
+        description: "Ett koncept för schemaläggning för verksamheter med flera platser, med tillgänglighet, ledighet, avtalsmässiga gränser och praktisk närvarokontroll.",
+        capabilities: ["Personalschemaläggning", "Hantering av tillgänglighet och semester", "Avtalsmässiga timgränser", "Ersättningsflöden och aviseringar", "Geofence-baserad närvaro"],
+        status: "Koncept",
+      },
+      de: {
+        category: "Personaleinsatzplanung",
+        description: "Ein Schichtplanungskonzept für Unternehmen mit mehreren Standorten, mit Verfügbarkeit, Urlaub, vertraglichen Grenzen und praktischer Anwesenheitskontrolle.",
+        capabilities: ["Mitarbeiterplanung", "Verfügbarkeits- und Urlaubsverwaltung", "Vertragliche Stundengrenzen", "Vertretungs-Workflows und Benachrichtigungen", "Geofence-basierte Anwesenheit"],
+        status: "Konzept",
+      },
+    },
   },
   {
     name: "UnderStack AI Agent",
@@ -894,6 +1010,38 @@ export const archivedProjects: PortfolioProject[] = [
         ],
         status: "Aktiv udvikling - Windows",
       },
+      se: {
+        category: "Local-first Windows-skrivbordsagent",
+        description: "En local-first skrivbordsagent under aktiv utveckling för kontrollerat repository-arbete, diagnostik, patchning och verifierade ingenjörsarbetsflöden.",
+        capabilities: [
+          "Lokalt skrivbordsdashboard för agentarbete",
+          "Lokal daemon via localhost-API:er",
+          "Skapande, status och exekveringsflöde för uppgifter",
+          "Projektregistrering och repository-analys",
+          "Lokal SQLite-lagring för minne, audit logs och projektprofiler",
+          "Ollama-modellstatus, modellval och lokal chatt",
+          "Vitlistad build-diagnostik och kommandokörning",
+          "Pocket-parkoppling via tokenskyddad lokal eller tunnlad anslutning",
+          "Windows-installationsväg förberedd med Tauri",
+        ],
+        status: "Aktiv utveckling – Windows",
+      },
+      de: {
+        category: "Local-first Windows-Desktop-Agent",
+        description: "Ein local-first Desktop-Agent in aktiver Entwicklung für kontrollierte Repository-Arbeit, Diagnose, Patching und verifizierte Engineering-Workflows.",
+        capabilities: [
+          "Lokales Desktop-Dashboard für Agentenarbeit",
+          "Lokaler Daemon über localhost-APIs",
+          "Erstellung, Status und Ausführungsablauf von Aufgaben",
+          "Projektregistrierung und Repository-Analyse",
+          "Lokale SQLite-Speicherung für Speicher, Audit-Logs und Projektprofile",
+          "Ollama-Modellstatus, Modellauswahl und lokaler Chat",
+          "Whitelisted Build-Diagnose und Befehlsausführung",
+          "Pocket-Kopplung über eine tokengeschützte lokale oder getunnelte Verbindung",
+          "Windows-Installer-Weg vorbereitet mit Tauri",
+        ],
+        status: "Aktive Entwicklung – Windows",
+      },
     },
   },
   {
@@ -919,6 +1067,18 @@ export const archivedProjects: PortfolioProject[] = [
         ],
         status: "Aktiv udvikling",
       },
+      se: {
+        category: "SaaS för restaurangservice",
+        description: "Restaurangservicemjukvara under utveckling för bordsplanering, bokningar, servicetiming och koordinering i front-of-house.",
+        capabilities: ["Bordöversikt och bordsplanering", "Bokningar och servicetiming", "Operativ koordinering för front-of-house-team"],
+        status: "Aktiv utveckling",
+      },
+      de: {
+        category: "SaaS für Restaurant-Serviceabläufe",
+        description: "Restaurant-Service-Software in Entwicklung für Tischplanung, Reservierungen, Service-Timing und Koordination im Front-of-House.",
+        capabilities: ["Tischübersicht und Tischplanung", "Reservierungen und Service-Timing", "Betriebliche Koordination für Front-of-House-Teams"],
+        status: "Aktive Entwicklung",
+      },
     },
   },
   {
@@ -928,6 +1088,26 @@ export const archivedProjects: PortfolioProject[] = [
       "An AI-powered creative platform concept for transforming, editing and animating visual content through generative models.",
     capabilities: ["Image-to-image workflows", "Image-to-video generation", "Creative editing workflows", "Multi-model architecture", "Personal media library"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "AI kreativ platform",
+        description: "Et AI-drevet kreativt platformskoncept til at transformere, redigere og animere visuelt indhold med generative modeller.",
+        capabilities: ["Image-to-image workflows", "Image-to-video-generering", "Kreative redigeringsworkflows", "Multi-model-arkitektur", "Personligt mediebibliotek"],
+        status: "Koncept",
+      },
+      se: {
+        category: "AI-kreativ plattform",
+        description: "Ett AI-drivet kreativt plattformskoncept för att transformera, redigera och animera visuellt innehåll med generativa modeller.",
+        capabilities: ["Image-to-image-arbetsflöden", "Image-to-video-generering", "Kreativa redigeringsflöden", "Multi-modellarkitektur", "Personligt mediebibliotek"],
+        status: "Koncept",
+      },
+      de: {
+        category: "KI-Kreativplattform",
+        description: "Ein KI-gestütztes kreatives Plattformkonzept zum Transformieren, Bearbeiten und Animieren visueller Inhalte mit generativen Modellen.",
+        capabilities: ["Image-to-Image-Workflows", "Image-to-Video-Generierung", "Kreative Bearbeitungs-Workflows", "Multi-Modell-Architektur", "Persönliche Medienbibliothek"],
+        status: "Konzept",
+      },
+    },
   },
   {
     name: "Meeting Copilot",
@@ -936,6 +1116,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A real-time meeting assistant concept designed for private use without retaining meeting recordings.",
     capabilities: ["Microphone transcription", "Rolling context", "Question detection", "Short suggested answers", "Privacy-conscious session design"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "Privat mødeassistent",
+        description: "Et koncept til en realtids mødeassistent designet til privat brug uden at gemme mødeoptagelser.",
+        capabilities: ["Mikrofontranskription", "Løbende kontekst", "Spørgsmålsdetektion", "Korte forslag til svar", "Privatlivsbevidst sessionsdesign"],
+        status: "Koncept",
+      },
+      se: {
+        category: "Privat mötesassistent",
+        description: "Ett koncept för en mötesassistent i realtid, utformad för privat bruk utan att spara mötesinspelningar.",
+        capabilities: ["Mikrofontranskription", "Löpande kontext", "Frågedetektering", "Korta föreslagna svar", "Integritetsmedvetet sessionsdesign"],
+        status: "Koncept",
+      },
+      de: {
+        category: "Privater Meeting-Assistent",
+        description: "Ein Konzept für einen Echtzeit-Meeting-Assistenten für den privaten Gebrauch, ohne Meeting-Aufnahmen zu speichern.",
+        capabilities: ["Mikrofontranskription", "Fortlaufender Kontext", "Fragenerkennung", "Kurze Antwortvorschläge", "Datenschutzbewusstes Sitzungsdesign"],
+        status: "Konzept",
+      },
+    },
   },
   {
     name: "CodeQuest",
@@ -944,6 +1144,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A programming education product for autistic children, designed with sensory settings, clear feedback and supported learning paths.",
     capabilities: ["Sensory settings", "Focus mode", "Friendly error handling", "Code editor and guided tutor", "Parent mode and multilingual paths"],
     status: "In development - Android and iOS",
+    localized: {
+      dk: {
+        category: "Inkluderende programmeringsundervisning",
+        description: "Et programmeringsundervisningsprodukt til autistiske børn, designet med sensoriske indstillinger, tydelig feedback og understøttede læringsforløb.",
+        capabilities: ["Sensoriske indstillinger", "Fokustilstand", "Venlig fejlhåndtering", "Kodeeditor og guidet tutor", "Forældretilstand og flersprogede forløb"],
+        status: "Under udvikling - Android og iOS",
+      },
+      se: {
+        category: "Inkluderande programmeringsutbildning",
+        description: "En produkt för programmeringsutbildning för autistiska barn, utformad med sensoriska inställningar, tydlig feedback och stödda inlärningsvägar.",
+        capabilities: ["Sensoriska inställningar", "Fokusläge", "Vänlig felhantering", "Kodredigerare och guidad handledare", "Föräldraläge och flerspråkiga vägar"],
+        status: "Under utveckling – Android och iOS",
+      },
+      de: {
+        category: "Inklusive Programmierbildung",
+        description: "Ein Programmierbildungsprodukt für autistische Kinder, gestaltet mit sensorischen Einstellungen, klarem Feedback und unterstützten Lernpfaden.",
+        capabilities: ["Sensorische Einstellungen", "Fokusmodus", "Freundliche Fehlerbehandlung", "Code-Editor und geführter Tutor", "Elternmodus und mehrsprachige Lernpfade"],
+        status: "In Entwicklung – Android und iOS",
+      },
+    },
   },
   {
     name: "Food Cost Calculator",
@@ -952,6 +1172,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A mobile tool concept for recipe cost, servings, selling price and margin calculations with local persistence.",
     capabilities: ["Recipe cost calculation", "Servings and yield", "Selling price guidance", "Margin calculation", "Local persistence"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "Restaurantværktøjs-app",
+        description: "Et koncept til et mobilværktøj til opskriftspris, portioner, salgspris og avanceberegninger med lokal lagring.",
+        capabilities: ["Beregning af opskriftspris", "Portioner og udbytte", "Vejledning til salgspris", "Avanceberegning", "Lokal lagring"],
+        status: "Koncept",
+      },
+      se: {
+        category: "Restaurangverktygsapp",
+        description: "Ett koncept för ett mobilverktyg för receptkostnad, portioner, försäljningspris och marginalberäkningar med lokal lagring.",
+        capabilities: ["Beräkning av receptkostnad", "Portioner och utbyte", "Vägledning för försäljningspris", "Marginalberäkning", "Lokal lagring"],
+        status: "Koncept",
+      },
+      de: {
+        category: "Restaurant-Utility-App",
+        description: "Ein mobiles Tool-Konzept für Rezeptkosten, Portionen, Verkaufspreis und Margenberechnung mit lokaler Speicherung.",
+        capabilities: ["Berechnung der Rezeptkosten", "Portionen und Ausbeute", "Verkaufspreis-Empfehlung", "Margenberechnung", "Lokale Speicherung"],
+        status: "Konzept",
+      },
+    },
   },
   {
     name: "WasteTrackr",
@@ -960,6 +1200,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A mobile waste logging tool concept for restaurant teams with a practical history and operational overview.",
     capabilities: ["Waste logging", "Operational dashboard", "History and editing", "Date filters", "Team-facing insight"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "Restaurantværktøjs-app",
+        description: "Et koncept til et mobilt spildregistreringsværktøj til restaurantteams med praktisk historik og driftsoverblik.",
+        capabilities: ["Spildregistrering", "Driftsdashboard", "Historik og redigering", "Datofiltre", "Indsigt til teamet"],
+        status: "Koncept",
+      },
+      se: {
+        category: "Restaurangverktygsapp",
+        description: "Ett koncept för ett mobilt verktyg för svinnregistrering för restaurangteam, med praktisk historik och driftsöversikt.",
+        capabilities: ["Svinnregistrering", "Driftsdashboard", "Historik och redigering", "Datumfilter", "Insikt för teamet"],
+        status: "Koncept",
+      },
+      de: {
+        category: "Restaurant-Utility-App",
+        description: "Ein mobiles Konzept zur Erfassung von Lebensmittelverschwendung für Restaurantteams mit praktischer Historie und Betriebsüberblick.",
+        capabilities: ["Erfassung von Verschwendung", "Betriebs-Dashboard", "Historie und Bearbeitung", "Datumsfilter", "Einblicke für das Team"],
+        status: "Konzept",
+      },
+    },
   },
   {
     name: "Restaurant Micro-tools",
@@ -968,6 +1228,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A focused product line concept for inventory, recipe cost, menu engineering and accountable kitchen routines.",
     capabilities: ["Inventory", "Recipe Cost", "Menu Engineering", "Shift Checklist", "Optional Pocket connection"],
     status: "Active development",
+    localized: {
+      dk: {
+        category: "Hospitality-drift",
+        description: "Et fokuseret koncept for en produktlinje til lager, opskriftspris, menu engineering og ansvarlige køkkenrutiner.",
+        capabilities: ["Lager", "Opskriftspris", "Menu Engineering", "Vagtcheckliste", "Valgfri Pocket-forbindelse"],
+        status: "Aktiv udvikling",
+      },
+      se: {
+        category: "Hospitality-drift",
+        description: "Ett fokuserat produktlinjekoncept för lager, receptkostnad, menyutveckling och ansvarsfulla köksrutiner.",
+        capabilities: ["Lager", "Receptkostnad", "Menu Engineering", "Skiftchecklista", "Valfri Pocket-anslutning"],
+        status: "Aktiv utveckling",
+      },
+      de: {
+        category: "Gastgewerbe-Betrieb",
+        description: "Ein fokussiertes Produktlinienkonzept für Lagerbestand, Rezeptkosten, Menu Engineering und nachvollziehbare Küchenroutinen.",
+        capabilities: ["Lagerbestand", "Rezeptkosten", "Menu Engineering", "Schichtcheckliste", "Optionale Pocket-Verbindung"],
+        status: "Aktive Entwicklung",
+      },
+    },
   },
   {
     name: "FollowUp, PingPerson and Recall",
@@ -976,6 +1256,26 @@ export const archivedProjects: PortfolioProject[] = [
       "Android-first utility product concepts for reply obligations, person-triggered context and intentional memory resurfacing.",
     capabilities: ["Follow-up commitments", "Person-based talking points", "Intentional memory capture", "Explicit permissions", "Pocket-ready product direction"],
     status: "In development - Android-first",
+    localized: {
+      dk: {
+        category: "Local-first værktøjer",
+        description: "Android-first værktøjskoncepter til svarforpligtelser, personudløst kontekst og bevidst genkaldelse af hukommelse.",
+        capabilities: ["Opfølgningsforpligtelser", "Personbaserede talepunkter", "Bevidst hukommelsesregistrering", "Eksplicitte tilladelser", "Pocket-klar produktretning"],
+        status: "Under udvikling - Android-first",
+      },
+      se: {
+        category: "Local-first-verktyg",
+        description: "Android-first verktygskoncept för svarsförpliktelser, personutlöst kontext och medveten återkallning av minnen.",
+        capabilities: ["Uppföljningsåtaganden", "Personbaserade samtalspunkter", "Medveten minnesinsamling", "Uttryckliga behörigheter", "Pocket-redo produktinriktning"],
+        status: "Under utveckling – Android-first",
+      },
+      de: {
+        category: "Local-first-Tools",
+        description: "Android-first Utility-Produktkonzepte für Antwortverpflichtungen, personenausgelösten Kontext und bewusstes Wiederauftauchen von Erinnerungen.",
+        capabilities: ["Follow-up-Verpflichtungen", "Personenbezogene Gesprächspunkte", "Bewusste Speichererfassung", "Ausdrückliche Berechtigungen", "Pocket-fähige Produktrichtung"],
+        status: "In Entwicklung – Android-first",
+      },
+    },
   },
   {
     name: "Family Safety",
@@ -984,6 +1284,26 @@ export const archivedProjects: PortfolioProject[] = [
       "A family safety product concept with parent and child roles, clear location controls and privacy-first platform behavior.",
     capabilities: ["Parent and child roles", "Live location", "Safe and restricted zones", "Alerts and SOS", "Device health and privacy controls"],
     status: "In development - Android and iOS",
+    localized: {
+      dk: {
+        category: "Familielokation og sikkerhed",
+        description: "Et koncept til et familiesikkerhedsprodukt med forælder- og børneroller, tydelig lokationsstyring og privatlivsorienteret platformadfærd.",
+        capabilities: ["Forælder- og børneroller", "Live lokation", "Sikre og begrænsede zoner", "Alarmer og SOS", "Enhedstjek og privatlivskontrol"],
+        status: "Under udvikling - Android og iOS",
+      },
+      se: {
+        category: "Familjeplats och säkerhet",
+        description: "Ett koncept för en familjesäkerhetsprodukt med föräldra- och barnroller, tydlig platskontroll och integritetsfokuserat plattformsbeteende.",
+        capabilities: ["Föräldra- och barnroller", "Live-plats", "Säkra och begränsade zoner", "Larm och SOS", "Enhetshälsa och integritetskontroller"],
+        status: "Under utveckling – Android och iOS",
+      },
+      de: {
+        category: "Familienstandort und Sicherheit",
+        description: "Ein Familiensicherheitsprodukt-Konzept mit Eltern- und Kindrollen, klarer Standortkontrolle und datenschutzorientiertem Plattformverhalten.",
+        capabilities: ["Eltern- und Kindrollen", "Live-Standort", "Sichere und eingeschränkte Zonen", "Alarme und SOS", "Gerätezustand und Datenschutzeinstellungen"],
+        status: "In Entwicklung – Android und iOS",
+      },
+    },
   },
   {
     name: "UnderStack Product Ecosystem",
@@ -992,6 +1312,26 @@ export const archivedProjects: PortfolioProject[] = [
       "An early foundation concept for identity, permission boundaries and audited cross-product workflows across web, mobile and desktop software.",
     capabilities: ["Shared identity", "Capability manifests", "Permission boundaries", "Action routing", "Audited cross-product workflows"],
     status: "Concept",
+    localized: {
+      dk: {
+        category: "Delt platformstrategi",
+        description: "Et tidligt fundamentkoncept for identitet, tilladelsesgrænser og reviderede tværprodukt-workflows på tværs af web-, mobil- og desktopsoftware.",
+        capabilities: ["Delt identitet", "Capability manifests", "Tilladelsesgrænser", "Handlingsrouting", "Reviderede tværprodukt-workflows"],
+        status: "Koncept",
+      },
+      se: {
+        category: "Delad plattformsstrategi",
+        description: "Ett tidigt grundkoncept för identitet, behörighetsgränser och granskade tvärprodukts-arbetsflöden över webb-, mobil- och skrivbordsmjukvara.",
+        capabilities: ["Delad identitet", "Capability-manifest", "Behörighetsgränser", "Handlingsdirigering", "Granskade tvärprodukts-arbetsflöden"],
+        status: "Koncept",
+      },
+      de: {
+        category: "Gemeinsame Plattformstrategie",
+        description: "Ein frühes Grundlagenkonzept für Identität, Berechtigungsgrenzen und auditierte produktübergreifende Workflows über Web-, Mobile- und Desktop-Software hinweg.",
+        capabilities: ["Gemeinsame Identität", "Capability-Manifeste", "Berechtigungsgrenzen", "Aktionsrouting", "Auditierte produktübergreifende Workflows"],
+        status: "Konzept",
+      },
+    },
   },
 ];
 
